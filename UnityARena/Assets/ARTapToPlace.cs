@@ -8,8 +8,9 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARTapToPlace : MonoBehaviour
 {
-
-    public GameObject gameObjectToInstatiate;
+    public GameObject Monitor;
+    public GameObject Tv;
+    private GameObject gameObjectToInstatiate;
     private GameObject spawnedObject;
     private ARRaycastManager _arRaycastManager;
     private Vector2 touchPosition;
@@ -21,6 +22,7 @@ public class ARTapToPlace : MonoBehaviour
     private void Awake()
     {
         _arRaycastManager = GetComponent<ARRaycastManager>();
+        gameObjectToInstatiate = Monitor;
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition) {
@@ -66,9 +68,31 @@ public class ARTapToPlace : MonoBehaviour
                 }
                 catch (Exception)
                 {
-                    Debug.Log("HERE");
+                    
                 }
             }
+        }
+    }
+
+    public void nextItem() {
+        if (gameObjectToInstatiate == Monitor)
+        {
+            gameObjectToInstatiate = Tv;
+        }
+        else {
+            gameObjectToInstatiate = Monitor;
+        }
+        try
+        {
+            var curPose = spawnedObject.transform.position;
+            var curRote = spawnedObject.transform.GetChild(0).gameObject.transform.GetChild(0).transform.rotation;
+            Destroy(spawnedObject);
+            spawnedObject = null;
+            spawnedObject = Instantiate(gameObjectToInstatiate, curPose, curRote);
+        }
+        catch (Exception)
+        {
+            Debug.Log("HERE2");
         }
     }
 }
