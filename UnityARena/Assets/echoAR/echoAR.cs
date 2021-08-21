@@ -22,6 +22,7 @@ public class echoAR : MonoBehaviour
 
     // Your echoAR API key
     public string APIKey = "<YOUR_API_KEY>";
+    public string APIObject = "<YOUR_Object_KEY>";
     private string serverURL;
 
     // echoAR Database
@@ -43,9 +44,9 @@ public class echoAR : MonoBehaviour
         try
         {
             // Query database for all the entires
-            StartCoroutine(QueryDatabase(serverURL));
+            // StartCoroutine(QueryDatabase(serverURL));
             // What to query a single entry? Replace the above line with:
-            // StartCoroutine(QueryDatabase(serverURL + "&entry=<ENTRY_ID>"));
+            StartCoroutine(QueryDatabase(serverURL + "&entry=" + APIObject));
         }
         catch (System.Exception e)
         {
