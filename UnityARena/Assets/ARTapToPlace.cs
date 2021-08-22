@@ -39,7 +39,7 @@ public class ARTapToPlace : MonoBehaviour
     }
 
     bool TryGetTouchPosition(out Vector2 touchPosition) {
-        if (Input.touchCount ==1 && EventSystem.current.IsPointerOverGameObject()) {
+        if (Input.touchCount ==1) {
             touchPosition = Input.GetTouch(0).position;
             return true;
         }
